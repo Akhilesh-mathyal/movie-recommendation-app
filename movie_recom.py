@@ -1,11 +1,27 @@
 import streamlit as st
 import joblib
 import requests
+from huggingface_hub import hf_hub_download   # ✅ NEW
 
-# ==== Load Data ====
-df = joblib.load('movie_df.pkl')
-model = joblib.load('movie_model.pkl')
-vectors = joblib.load('movie_vectors.pkl')
+# ==== Load Data from Hugging Face Hub ====
+# replace "your-username/my-movie-recom-model" with your actual repo
+model_path = hf_hub_download(
+    repo_id="your-username/my-movie-recom-model",  
+    filename="movie_model.pkl"
+)
+df_path = hf_hub_download(
+    repo_id="your-username/my-movie-recom-model",
+    filename="movie_df.pkl"
+)
+vectors_path = hf_hub_download(
+    repo_id="your-username/my-movie-recom-model",
+    filename="movie_vectors.pkl"
+)
+
+# Load the files as usual
+df = joblib.load(df_path)
+model = joblib.load(model_path)
+vectors = joblib.load(vectors_path)
 
 # ==== Page Config ====
 st.set_page_config(page_title="Movie Recommendation App", layout="wide")
@@ -209,3 +225,4 @@ elif st.session_state.page == "recommend":
         st.warning("No movie selected. Please choose a movie first.")
     if st.button("⬅ Back"):
         st.session_state.page = "select"
+
