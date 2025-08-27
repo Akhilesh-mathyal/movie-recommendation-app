@@ -69,7 +69,7 @@ st.markdown("""
 # ==== Sidebar ====
 with st.sidebar:
     st.title("📞 Contact Us")
-    #st.image("D:\Project\imakhilesh_mathyal_qr.png", width=150)
+    st.image("imakhilesh_mathyal_qr.png", width=150)
     st.text_input("📨 Email", placeholder="Enter your email")
     st.text_input("📞 Phone", placeholder="Enter your phone number")
     st.text_area("📬 Message", placeholder="Enter your message here")
@@ -225,6 +225,7 @@ elif st.session_state.page == "recommend":
         st.warning("No movie selected. Please choose a movie first.")
     if st.button("⬅ Back"):
         st.session_state.page = "select"
+
 
 
 
