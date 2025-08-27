@@ -6,15 +6,15 @@ from huggingface_hub import hf_hub_download   # ✅ NEW
 # ==== Load Data from Hugging Face Hub ====
 # replace "your-username/my-movie-recom-model" with your actual repo
 model_path = hf_hub_download(
-    repo_id="your-username/my-movie-recom-model",  
+    repo_id="https://huggingface.co/Akhilesh42/movie-recom",  
     filename="movie_model.pkl"
 )
 df_path = hf_hub_download(
-    repo_id="your-username/my-movie-recom-model",
+    repo_id="https://huggingface.co/Akhilesh42/movie-recom",
     filename="movie_df.pkl"
 )
 vectors_path = hf_hub_download(
-    repo_id="your-username/my-movie-recom-model",
+    repo_id="https://huggingface.co/Akhilesh42/movie-recom",
     filename="movie_vectors.pkl"
 )
 
@@ -225,4 +225,5 @@ elif st.session_state.page == "recommend":
         st.warning("No movie selected. Please choose a movie first.")
     if st.button("⬅ Back"):
         st.session_state.page = "select"
+
 
