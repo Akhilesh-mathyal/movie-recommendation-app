@@ -1,7 +1,7 @@
 import streamlit as st
 import joblib
 import requests
-from huggingface_hub import hf_hub_download   # ✅ NEW
+from huggingface_hub import hf_hub_download   #  NEW
 
 # ==== Load Data from Hugging Face Hub ====
 # replace "your-username/my-movie-recom-model" with your actual repo
@@ -181,7 +181,8 @@ def show_recommendations(movie_name):
     movie_vector = vectors[movie_index]
     distances, indexes = model.kneighbors([movie_vector], n_neighbors=10)  # 10 posters
 
-    recommended_df = df.loc[indexes[0][1:], ["name", "movie_id"]]
+    # FIX: use iloc because indexes are integer positions
+    recommended_df = df.iloc[indexes[0][1:]][["name", "movie_id"]]
     recommended_iter = recommended_df.itertuples(index=False)
 
     main_poster = get_poster_url(df.loc[movie_index].movie_id)
@@ -191,6 +192,7 @@ def show_recommendations(movie_name):
 
     st.markdown(f"<h2 style='color:#ff4b4b;'>Recommended Movies</h2>", unsafe_allow_html=True)
     display_posters(recommended_iter)
+
 
 # ==== Handle Poster Click ====
 query_params = st.query_params
@@ -225,6 +227,7 @@ elif st.session_state.page == "recommend":
         st.warning("No movie selected. Please choose a movie first.")
     if st.button("⬅ Back"):
         st.session_state.page = "select"
+
 
 
 
